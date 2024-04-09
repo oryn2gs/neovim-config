@@ -3,6 +3,10 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
+    javascript = { { "prettierd", "prettier" } },
+    javascriptreact = { { "prettierd", "prettier" } },
+    typescript = { { "prettierd", "prettier" } },
+    typescriptreact = { { "prettierd", "prettier" } },
     python = { "isort", "black" },
   },
 
@@ -10,7 +14,7 @@ local options = {
     -- These options will be passed to conform.format()
     lsp_fallback = true,
     async = false,
-    timeout_ms = 1000,
+    timeout_ms = 2000,
   },
 }
 
