@@ -14,7 +14,16 @@ local servers = {
       python = {
         analysis = {
           autoSearchPaths = true,
-          typeCheckingMode = "basic",
+          typeCheckingMode = "off",
+        },
+        disableOrganizeImports = true,
+        autoImportCompletions = true, -- Enable auto imports
+        inlayHints = { -- Enable inlay hints
+          enabled = true,
+          parameterHints = true,
+          typeHints = true,
+          chainingHints = true,
+          otherHints = true,
         },
       },
     },
