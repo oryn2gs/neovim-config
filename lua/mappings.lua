@@ -15,3 +15,11 @@ map("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree Focus win
 map("n", "<leader>tc", "<cmd>NvimTreeCollapse<CR>", { desc = "Nvimtree Collapse folder" })
 
 --telescope git commands
+
+-- Telecope media files
+map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
+
+-- formatters
+map("n", "<leader>fp", function()
+  require("conform").format { lsp_fallback = true }
+end, { desc = "Format Files" })

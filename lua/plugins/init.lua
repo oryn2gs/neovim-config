@@ -1,4 +1,15 @@
 return {
+
+  {
+    "nvim-lua/popup.nvim",
+    lazy = true,
+  },
+  {
+    "nvim-telescope/telescope-media-files.nvim",
+    lazy = true,
+  },
+
+  -- Formatters
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre", "BufNewFile" }, -- uncomment for format on save
@@ -27,7 +38,7 @@ return {
         "typescript-language-server",
         "tailwindcss-language-server",
         "emmet-language-server",
-        -- "eslint-lsp",
+        "eslint-lsp",
         "html-lsp",
         "css-lsp",
 
@@ -96,4 +107,63 @@ return {
   },
 
   -- Linters
+  {
+    "mfussenegger/nvim-lint",
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+    config = function()
+      require "configs.nvim-lint"
+    end,
+  },
+
+  -- NvChad/nvim-colorizer
+  {
+    "NvChad/nvim-colorizer.lua",
+    -- opts = {
+    --   user_default_options = {
+    --     tailwind = true,
+    --   },
+    -- },
+    config = function()
+      local colorizer = require "colorizer"
+      colorizer.setup {
+        user_default_options = {
+          tailwind = true,
+        },
+      }
+    end,
+  },
+  -- Update the options of nvim cmp
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+    },
+    opts = function(_, opts)
+      -- original NvChad kind icon formatter
+      local format_kinds = opts.formatting.format
+      opts.formatting.format = function(entry, item)
+        format_kinds(entry, item) -- add icons
+        return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+      end
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      local conf = require "nvchad.configs.telescope"
+      table.insert(conf.extensions_list, "media_files") -- extending the default list
+
+      -- Append the media files settings to the list of exiting extension table
+      table.insert(conf.extensions, "media_files") -- extending the default list
+      conf.extensions.media_files = {
+        filetypes = { "png", "webp", "jpg", "jpeg", "webm, pdf" },
+        find_cmd = "rg",
+      }
+
+      return conf
+    end,
+  },
 }
+-- NvChad/,
