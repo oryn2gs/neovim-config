@@ -71,8 +71,8 @@ return {
 
         "javascript",
         "typescript",
-        "javascriptreact",
-        "typescriptreact",
+        -- "javascriptreact",
+        -- "typescriptreact",
         "tsx",
 
         "prisma",
@@ -119,11 +119,6 @@ return {
   -- NvChad/nvim-colorizer
   {
     "NvChad/nvim-colorizer.lua",
-    -- opts = {
-    --   user_default_options = {
-    --     tailwind = true,
-    --   },
-    -- },
     config = function()
       local colorizer = require "colorizer"
       colorizer.setup {

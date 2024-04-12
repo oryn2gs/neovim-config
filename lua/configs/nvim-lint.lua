@@ -2,10 +2,10 @@ local lint = require "lint"
 
 lint.linters_by_ft = {
   python = { "pylint" },
-  javascript = { { "eslint_d", "eslint" } },
-  typescript = { { "eslint_d", "eslint" } },
-  javascriptreact = { { "eslint_d", "eslint" } },
-  typescriptreact = { { "eslint_d", "eslint" } },
+  -- javascript = { "eslint_d" },
+  -- typescript = { "eslint_d" },
+  -- javascriptreact = { "eslint_d" },
+  -- typescriptreact = { "eslint_d" },
 }
 
 require("lint").linters.pylint.cmd = "python"

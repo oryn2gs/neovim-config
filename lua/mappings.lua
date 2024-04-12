@@ -1,18 +1,18 @@
 require "nvchad.mappings"
 
--- add yours here
-
 local map = vim.keymap.set
 
 -- basic
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
 
+-- Select all
+map("n", "<C-a>", "gg<S-v>G")
+
 -- nvimtree
-map("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
-map("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree Focus window" })
-map("n", "<leader>tc", "<cmd>NvimTreeCollapse<CR>", { desc = "Nvimtree Collapse folder" })
+map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
+map("n", "<leader>f", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree find files and folder" })
+map("n", "<leader>c", "<cmd>NvimTreeCollapse<CR>", { desc = "Nvimtree Collapse folder" })
 
 --telescope git commands
 
@@ -23,3 +23,53 @@ map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope fin
 map("n", "<leader>fp", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "Format Files" })
+
+-- Window
+map("n", "<leader>ws", ":split<Return>", { desc = "Window split horizontally" })
+map("n", "<leader>wv", ":vsplit<Return>", { desc = "Window split vertically" })
+map("n", "<leader>wh", "<C-w>h", { desc = "Window move left" })
+map("n", "<leader>wk", "<C-w>k", { desc = "Window move up" })
+map("n", "<leader>wj", "<C-w>j", { desc = "Window move down" })
+map("n", "<leader>wl", "<C-w>l", { desc = "Window move right", noremap = true, silent = true }) -- clashes with the lsp mappings
+map("n", "<leader>w=", "<C-w>=", { desc = "Window resize equal" })
+map("n", "<leader>w|", "<C-w>|", { desc = "Window rezize max width" })
+map("n", "<leader>w_", "<C-w>_", { desc = "Window resize max height" })
+map("n", "<leader>wo", "<C-w>o", { desc = "Window close all other" })
+map("n", "<leader>wx", "<C-w>x", { desc = "Window swap current with next" })
+
+-- buffers
+map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
+map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
+map("n", "<leader>bd", function()
+  require("nvchad.tabufline").close_buffer()
+end, { desc = "Buffer Close" })
+
+-- terminal
+map({ "n", "t" }, "<leader>tt", function()
+  require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.3 }
+end, { desc = "Terminal Toggleable vertical term" })
+
+map("n", "<leader>th", function()
+  require("nvchad.term").new { pos = "sp", size = 0.3 }
+end, { desc = "Terminal New horizontal term" })
+
+map("n", "<leader>tv", function()
+  require("nvchad.term").new { pos = "vsp", size = 0.3 }
+end, { desc = "Terminal New vertical window" })
+
+map("t", "<ESC>", function()
+  local win = vim.api.nvim_get_current_win()
+  vim.api.nvim_win_close(win, true)
+end, { desc = "Terminal Close term in terminal mode" })
+
+-- Disable Nvchad mappings
+local nomap = vim.keymap.del
+
+nomap("n", "<leader>h")
+nomap("n", "<leader>v")
+nomap({ "n", "t" }, "<M-v>")
+nomap({ "n", "t" }, "<M-h>")
+nomap("t", "<C-X>")
+nomap("n", "<C-n>")
+nomap("n", "<leader>x")
+nomap("n", "<leader>b")
