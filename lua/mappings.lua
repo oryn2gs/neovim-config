@@ -12,7 +12,6 @@ map("n", "<C-a>", "gg<S-v>G")
 -- nvimtree
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
 map("n", "<leader>f", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree find files and folder" })
-map("n", "<leader>c", "<cmd>NvimTreeCollapse<CR>", { desc = "Nvimtree Collapse folder" })
 
 --telescope git commands
 
@@ -42,7 +41,19 @@ map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 map("n", "<leader>bd", function()
   require("nvchad.tabufline").close_buffer()
-end, { desc = "Buffer Close" })
+end, { desc = "Buffer close current" })
+
+-- Deletes all the buffers except the current one
+function delete_other_buffers()
+  local current_buffer = vim.api.nvim_get_current_buf()
+  local all_buffers = vim.api.nvim_list_bufs()
+  for _, buffer in ipairs(all_buffers) do
+    if buffer ~= current_buffer then
+      vim.api.nvim_buf_delete(buffer, { force = true })
+    end
+  end
+end
+map("n", "<leader>bo", ":lua delete_other_buffers()<CR>", { noremap = true, desc = "Buffer close all other" })
 
 -- terminal
 map({ "n", "t" }, "<leader>tt", function()
