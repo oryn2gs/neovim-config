@@ -73,6 +73,10 @@ return {
 
         "vim",
         "vimdoc",
+        "regex",
+        "bash",
+        "markdown",
+        "markdown_inline",
 
         "gitcommit",
         "dockerfile",
