@@ -29,7 +29,8 @@ map("n", "<leader>wv", ":vsplit<Return>", { desc = "Window split vertically" })
 map("n", "<leader>wh", "<C-w>h", { desc = "Window move left" })
 map("n", "<leader>wk", "<C-w>k", { desc = "Window move up" })
 map("n", "<leader>wj", "<C-w>j", { desc = "Window move down" })
-map("n", "<leader>wl", "<C-w>l", { desc = "Window move right", noremap = true, silent = true }) -- clashes with the lsp mappings
+-- map("n", "<leader>wl", "<C-w>l", { desc = "Window move right", noremap = true, silent = true }) -- clashes with the lsp mappings
+map("n", "<leader>wp", "<C-w>l", { desc = "Window move right", noremap = true, silent = true }) -- Quick fixes chang later
 map("n", "<leader>w=", "<C-w>=", { desc = "Window resize equal" })
 map("n", "<leader>w|", "<C-w>|", { desc = "Window rezize max width" })
 map("n", "<leader>w_", "<C-w>_", { desc = "Window resize max height" })

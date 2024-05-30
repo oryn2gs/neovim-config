@@ -15,7 +15,7 @@ local servers = {
       python = {
         analysis = {
           autoSearchPaths = true,
-          typeCheckingMode = "off",
+          typeCheckingMode = "strict", -- enabled to global type checking ("off", "basic", "standard", "strict")
         },
         disableOrganizeImports = true,
         autoImportCompletions = true, -- Enable auto imports

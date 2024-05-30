@@ -6,6 +6,7 @@ local opt = vim.opt
 local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 --
--- -- backspace
+opt.number = true
+opt.relativenumber = true
 opt.autoindent = true
 o.backspace = "indent,eol,start" -- allow backspace on indent
