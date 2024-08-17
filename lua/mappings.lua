@@ -6,42 +6,10 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all in the buffer" })
-
-function show_diagnostics_in_quickfix()
-  local diagnostics = vim.diagnostic.get(0)
-  local items = {}
-
-  for _, diagnostic in ipairs(diagnostics) do
-    table.insert(items, {
-      bufnr = diagnostic.bufnr,
-      lnum = diagnostic.lnum + 1, -- Quickfix is 1-indexed
-      col = diagnostic.col + 1, -- Quickfix is 1-indexed
-      text = diagnostic.message,
-      type = diagnostic.severity == vim.diagnostic.severity.ERROR and "E"
-        or diagnostic.severity == vim.diagnostic.severity.WARN and "W"
-        or diagnostic.severity == vim.diagnostic.severity.INFO and "I"
-        or "H", -- H for hints
-    })
-  end
-
-  vim.fn.setqflist(items)
-  vim.cmd "copen"
-end
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>qd",
-  ":lua show_diagnostics_in_quickfix()<CR>",
-  { noremap = true, silent = true, desc = "Show diagonostics in quickfix list." }
-)
+map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 
 -- INFO: LSP mappings
-map(
-  "n",
-  "<leader>gp",
-  ":lua vim.lsp.buf.hover()<CR>",
-  { noremap = true, silent = true, desc = "Peek function definition" }
-)
+map("n", "<leader>pd", ":lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true, desc = "LSP peek definition" })
 
 -- INFO: Nvim tree mappings
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
@@ -49,6 +17,7 @@ map("n", "<leader>f", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree find files
 
 -- INFO: Telecope mappings
 map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
+vim.api.nvim_set_keymap("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
 
 -- INFO: conform mapping
 map("n", "<leader>fp", function()
@@ -71,7 +40,6 @@ end, { desc = "Format Files" })
 -- map("n", "<leader>wx", "<C-w>x", { desc = "Window swap current with next" })
 
 -- INFO: Buffer mappings
-map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 map("n", "<leader>bd", function()
   require("nvchad.tabufline").close_buffer()
@@ -108,13 +76,6 @@ map("t", "<ESC>", function()
 end, { desc = "Terminal Close term in terminal mode" })
 
 -- INFO: disable defaults NvChad mappings
-local nomap = vim.keymap.del
-
-nomap("n", "<leader>h")
-nomap("n", "<leader>v")
-nomap({ "n", "t" }, "<M-v>")
-nomap({ "n", "t" }, "<M-h>")
-nomap("t", "<C-X>")
-nomap("n", "<C-n>")
-nomap("n", "<leader>x")
-nomap("n", "<leader>b")
+local nomap = vim.api.nvim_del_keymap
+-- vim.api.nvim_del_keymap("n", "<leader>gt")
+nomap("n", "<leader>/")
