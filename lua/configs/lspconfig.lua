@@ -5,7 +5,27 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 local servers = {
   html = {},
   cssls = {},
-  lua_ls = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT", -- Neovim uses LuaJIT
+          path = vim.split(package.path, ";"),
+        },
+        diagnostics = {
+          globals = { "vim" }, -- Define globals
+          disable = { "lowercase-global" }, -- You can add more to ignore other warnings
+        },
+        workspace = {
+          library = vim.api.nvim_get_runtime_file("", true), -- Neovim runtime files
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  },
   tsserver = {},
   tailwindcss = {},
   eslint = {},
