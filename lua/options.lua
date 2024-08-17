@@ -12,6 +12,6 @@ opt.autoindent = true
 o.backspace = "indent,eol,start" -- allow backspace on indent
 
 -- INFO: Folding
-vim.o.foldmethod = "indent"
+vim.o.foldmethod = "manual"
 vim.o.foldopen = "all"
 vim.o.foldclose = "all"

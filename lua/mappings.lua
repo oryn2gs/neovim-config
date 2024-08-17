@@ -75,6 +75,24 @@ map("t", "<ESC>", function()
   vim.api.nvim_win_close(win, true)
 end, { desc = "Terminal Close term in terminal mode" })
 
+--  INFO: Toggle between 'manual' and 'indent' foldmethod
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tf",
+  ":lua ToggleFoldMethod()<CR>",
+  { noremap = true, silent = true, desc = "Toggle foldmethod between indent and manual" }
+)
+
+function ToggleFoldMethod()
+  if vim.wo.foldmethod == "manual" then
+    vim.wo.foldmethod = "indent"
+    print "Foldmethod set to indent"
+  else
+    vim.wo.foldmethod = "manual"
+    print "Foldmethod set to manual"
+  end
+end
+
 -- INFO: disable defaults NvChad mappings
 local nomap = vim.api.nvim_del_keymap
 -- vim.api.nvim_del_keymap("n", "<leader>gt")
