@@ -10,3 +10,8 @@ opt.number = true
 opt.relativenumber = true
 opt.autoindent = true
 o.backspace = "indent,eol,start" -- allow backspace on indent
+
+-- INFO: Folding
+vim.o.foldmethod = "indent"
+vim.o.foldopen = "all"
+vim.o.foldclose = "all"
