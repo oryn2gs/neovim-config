@@ -70,7 +70,6 @@ return {
   -- TreeSitter
   {
     "nvim-treesitter/nvim-treesitter",
-    -- add this to it's own file
     opts = {
       ensure_installed = {
         "lua",

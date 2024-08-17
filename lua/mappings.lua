@@ -7,6 +7,42 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all in the buffer" })
 
+function show_diagnostics_in_quickfix()
+  local diagnostics = vim.diagnostic.get(0)
+  local items = {}
+
+  for _, diagnostic in ipairs(diagnostics) do
+    table.insert(items, {
+      bufnr = diagnostic.bufnr,
+      lnum = diagnostic.lnum + 1, -- Quickfix is 1-indexed
+      col = diagnostic.col + 1, -- Quickfix is 1-indexed
+      text = diagnostic.message,
+      type = diagnostic.severity == vim.diagnostic.severity.ERROR and "E"
+        or diagnostic.severity == vim.diagnostic.severity.WARN and "W"
+        or diagnostic.severity == vim.diagnostic.severity.INFO and "I"
+        or "H", -- H for hints
+    })
+  end
+
+  vim.fn.setqflist(items)
+  vim.cmd "copen"
+end
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>qd",
+  ":lua show_diagnostics_in_quickfix()<CR>",
+  { noremap = true, silent = true, desc = "Show diagonostics in quickfix list." }
+)
+
+-- INFO: LSP mappings
+map(
+  "n",
+  "<leader>gp",
+  ":lua vim.lsp.buf.hover()<CR>",
+  { noremap = true, silent = true, desc = "Peek function definition" }
+)
+
 -- INFO: Nvim tree mappings
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
 map("n", "<leader>f", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree find files and folder" })
