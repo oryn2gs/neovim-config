@@ -1,7 +1,5 @@
 if vim.g.vscode then
   -- VSCode extension
-  print "VS Code IDE... Starting...."
-  -- require("vscode.settings")
   vim.cmd [[source $HOME/.config/nvim/vscode/settings.vim]]
   -- easy motion  install
 else
@@ -45,6 +43,12 @@ else
   vim.schedule(function()
     require "mappings"
   end)
+
+  -- loading todo-comments
+  -- WARNING: Having issue loading the package initially
+  vim.defer_fn(function()
+    require("todo-comments").setup()
+  end, 0)
 
   -- Configuring python in the workspace
   local function get_python_interpreter()

@@ -14,7 +14,8 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre", "BufNewFile" }, -- uncomment for format on save
     config = function()
-      return require "configs.conform"
+      require "configs.conform"
+      -- return require "configs.conform"
     end,
   },
 
@@ -30,6 +31,9 @@ return {
       git = {
         enable = true,
         ignore = false,
+      },
+      filters = {
+        dotfiles = false, -- Set this to false to show dotfiles
       },
     },
   },
@@ -213,5 +217,14 @@ return {
       "rcarriga/nvim-notify",
     },
   },
+
+  -- todo-comments
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+    config = function()
+      require("todo-comments").setup() -- Load the todo-comments plugin with the above configuration
+    end,
+  },
 }
--- NvChad/,
