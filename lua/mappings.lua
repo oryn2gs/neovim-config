@@ -97,3 +97,4 @@ end
 local nomap = vim.api.nvim_del_keymap
 -- vim.api.nvim_del_keymap("n", "<leader>gt")
 nomap("n", "<leader>/")
+nomap("n", "<leader>b")
