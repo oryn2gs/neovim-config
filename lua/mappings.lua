@@ -93,6 +93,37 @@ function ToggleFoldMethod()
   end
 end
 
+-- INFO: Comments
+local function set_comment_keymap()
+  local filetype = vim.bo.filetype
+  local comment_string = ""
+
+  if filetype == "python" then
+    comment_string = "#"
+  elseif filetype == "lua" then
+    comment_string = "--"
+  elseif filetype == "javascript" or filetype == "typescript" then
+    comment_string = "//"
+  else
+    return
+  end
+
+  -- Create the key mapping for the current buffer
+  vim.api.nvim_buf_set_keymap(
+    0,
+    "n",
+    "gcA",
+    "$a " .. comment_string .. " <Esc>i",
+    { noremap = true, silent = true, desc = "Comment add at end of the line." }
+  )
+end
+
+-- Set up an autocommand to trigger the function when a file is loaded
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = set_comment_keymap,
+})
+
 -- INFO: disable defaults NvChad mappings
 local nomap = vim.api.nvim_del_keymap
 -- vim.api.nvim_del_keymap("n", "<leader>gt")
