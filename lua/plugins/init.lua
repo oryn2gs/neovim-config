@@ -15,7 +15,6 @@ return {
     event = { "BufWritePre", "BufNewFile" }, -- uncomment for format on save
     config = function()
       require "configs.conform"
-      -- return require "configs.conform"
     end,
   },
 
@@ -33,7 +32,7 @@ return {
         ignore = false,
       },
       filters = {
-        dotfiles = false, -- Set this to false to show dotfiles
+        dotfiles = false, --INFO: Set this to false to show dotfiles
       },
     },
   },
@@ -49,22 +48,10 @@ return {
 
   {
     "williamboman/mason.nvim",
-    -- need to add mason tool _ installer insted on mason_null/ (forr installing formattters and linter,)--> check the none-ls.lua file
-    opts = {
-      ensure_installed = {
-        "pyright",
-
-        -- web-dev
-        "typescript-language-server",
-        "tailwindcss-language-server",
-        "emmet-language-server",
-        "eslint-lsp",
-        "html-lsp",
-        "css-lsp",
-
-        "lua-language-server",
-      },
-    },
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    opts = function()
+      return require "configs.mason"
+    end,
   },
 
   -- TreeSitter
@@ -105,7 +92,6 @@ return {
 
   {
     "jay-babu/mason-null-ls.nvim",
-    -- event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
       "nvimtools/none-ls.nvim",

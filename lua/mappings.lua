@@ -13,7 +13,7 @@ map("n", "<leader>pd", ":lua vim.lsp.buf.hover()<CR>", { noremap = true, silent 
 
 -- INFO: Nvim tree mappings
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
-map("n", "<leader>f", "<cmd>NvimTreeFindFile<CR>", { desc = "Nvimtree find files and folder" })
+--TODO: add am keymap to open file as folder to system app
 
 -- INFO: Telecope mappings
 map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
