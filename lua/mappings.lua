@@ -58,17 +58,13 @@ end
 map("n", "<leader>bo", ":lua delete_other_buffers()<CR>", { noremap = true, desc = "Buffer close all other" })
 
 -- INFO: Terminal mappings
-map({ "n", "t" }, "<leader>tt", function()
+map({ "n", "t" }, "<leader>tv", function()
   require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.3 }
 end, { desc = "Terminal Toggleable vertical term" })
 
-map("n", "<leader>th", function()
+map("n", "<leader>tt", function()
   require("nvchad.term").new { pos = "sp", size = 0.3 }
 end, { desc = "Terminal New horizontal term" })
-
-map("n", "<leader>tv", function()
-  require("nvchad.term").new { pos = "vsp", size = 0.3 }
-end, { desc = "Terminal New vertical window" })
 
 map("t", "<ESC>", function()
   local win = vim.api.nvim_get_current_win()
@@ -95,16 +91,21 @@ end
 
 -- INFO: Comments
 local function set_comment_keymap()
-  local filetype = vim.bo.filetype
-  local comment_string = ""
+  local comment_map = {
+    python = "#",
+    lua = "--",
+    javascript = "//",
+    typescript = "//",
+    yml = "#",
+    yaml = "#",
+  }
 
-  if filetype == "python" then
-    comment_string = "#"
-  elseif filetype == "lua" then
-    comment_string = "--"
-  elseif filetype == "javascript" or filetype == "typescript" then
-    comment_string = "//"
-  else
+  -- Fetch the current filetype
+  local filetype = vim.bo.filetype
+  local comment_string = comment_map[filetype]
+
+  -- Return if the filetype has no comment string defined
+  if not comment_string then
     return
   end
 

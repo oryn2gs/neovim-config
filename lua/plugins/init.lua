@@ -125,7 +125,7 @@ return {
     end,
   },
 
-  -- NvChad/nvim-colorizer
+  -- NvChad/nvim-colorizer -- color highlighter
   {
     "NvChad/nvim-colorizer.lua",
     config = function()
@@ -137,7 +137,8 @@ return {
       }
     end,
   },
-  -- Update the options of nvim cmp
+  --
+  -- Tailwindcss highlighter
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -175,7 +176,6 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      -- add any options here
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
