@@ -4,14 +4,22 @@
 ---@type ChadrcConfig
 local M = {}
 
+-- For more configuration check `nvui` with telescope
 M.ui = {
-  theme = "tomorrow_night",
-  transparency = true,
+  tabufline = {},
+  statusline = {}, -- show when recording is enabled
 
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
   },
+}
+
+-- Theme resides in base46 for latest update
+-- For more configuration check `nvui.base46` with telescope
+M.base46 = {
+  theme = "tomorrow_night",
+  transparency = true,
 }
 
 return M
