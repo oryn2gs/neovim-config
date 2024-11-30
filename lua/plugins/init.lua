@@ -12,7 +12,7 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*", -- use for stability; omit to use `main` branch for the latest features
-    event = "verylazy",
+    event = "VeryLazy",
     config = function()
       require("nvim-surround").setup {
         -- configuration here, or leave empty to use defaults
@@ -59,7 +59,7 @@ return {
 
   {
     "williamboman/mason.nvim",
-    cmd = { "mason", "masoninstall", "masoninstallall", "masonupdate" },
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate", "MasonUninstallAll", "MasonLog" },
     opts = function()
       return require "configs.mason"
     end,
@@ -185,7 +185,7 @@ return {
   -- lazy.nvim
   {
     "folke/noice.nvim",
-    event = "verylazy",
+    event = "VeryLazy",
     opts = {
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **treesitter**
