@@ -2,15 +2,7 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
--- function SurroundText(text)
---   -- write a logic that will surroun text
---   normal! I<a:surround_text>
---   normal! o
---   normal! A<a:surround_text>
--- end
-
 -- INFO: Basic mappings
-map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all in the buffer" })
 map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
@@ -31,17 +23,15 @@ map("n", "<leader>fp", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "Format Files" })
 
--- INFO: Windo mappings
--- PERF: disabled because we're using wrap window settings
--- map("n", "<leader>ws", ":split<Return>", { desc = "Window split horizontally" })
--- map("n", "<leader>wv", ":vsplit<Return>", { desc = "Window split vertically" })
+-- INFO: NVIM window management
+map("n", "<leader>ws", ":split<Return>", { desc = "Window split horizontally" })
+map("n", "<leader>wv", ":vsplit<Return>", { desc = "Window split vertically" })
+map("n", "<leader>we", "<C-w>=", { desc = "Window resize equal" })
+map("n", "<leader>wm", "<C-w>|", { desc = "Window rezize max width" })
 -- map("n", "<leader>wh", "<C-w>h", { desc = "Window move left" })
 -- map("n", "<leader>wk", "<C-w>k", { desc = "Window move up" })
 -- map("n", "<leader>wj", "<C-w>j", { desc = "Window move down" })
--- map("n", "<leader>wl", "<C-w>l", { desc = "Window move right", noremap = true, silent = true }) -- clashes with the lsp mappings
--- map("n", "<leader>wp", "<C-w>l", { desc = "Window move right", noremap = true, silent = true }) -- Quick fixes chang later
--- map("n", "<leader>w=", "<C-w>=", { desc = "Window resize equal" })
--- map("n", "<leader>w|", "<C-w>|", { desc = "Window rezize max width" })
+-- map("n", "<leader>wl", "<C-w>l", { desc = "Window move right", silent = true })
 -- map("n", "<leader>w_", "<C-w>_", { desc = "Window resize max height" })
 -- map("n", "<leader>wo", "<C-w>o", { desc = "Window close all other" })
 -- map("n", "<leader>wx", "<C-w>x", { desc = "Window swap current with next" })
@@ -65,12 +55,12 @@ end
 map("n", "<leader>bo", ":lua delete_other_buffers()<CR>", { noremap = true, desc = "Buffer close all other" })
 
 -- INFO: Terminal mappings
-map({ "n", "t" }, "<leader>tv", function()
-  require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.3 }
+map({ "n", "t" }, "<leader>tt", function()
+  require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.5 }
 end, { desc = "Terminal Toggleable vertical term" })
 
-map("n", "<leader>tt", function()
-  require("nvchad.term").new { pos = "sp", size = 0.3 }
+map("n", "<leader>tb", function()
+  require("nvchad.term").new { pos = "sp", size = 0.5 }
 end, { desc = "Terminal New horizontal term" })
 
 map("t", "<ESC>", function()
@@ -105,6 +95,8 @@ local function set_comment_keymap()
     typescript = "//",
     yml = "#",
     yaml = "#",
+    json = "#",
+    toml = "#",
   }
 
   -- Fetch the current filetype

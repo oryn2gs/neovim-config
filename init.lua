@@ -44,7 +44,6 @@ else
   end)
 
   -- loading todo-comments
-  -- WARNING: Having issue loading the package initially
   vim.defer_fn(function()
     require("todo-comments").setup()
   end, 0)

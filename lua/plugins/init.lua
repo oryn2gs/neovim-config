@@ -1,14 +1,15 @@
 return {
-
   {
     "nvim-lua/popup.nvim",
     lazy = true,
   },
+
   {
     "nvim-telescope/telescope-media-files.nvim",
     lazy = true,
   },
 
+  -- nvim surround
   {
     "kylechui/nvim-surround",
     version = "*", -- use for stability; omit to use `main` branch for the latest features
