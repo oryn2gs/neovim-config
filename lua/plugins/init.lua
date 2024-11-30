@@ -9,16 +9,27 @@ return {
     lazy = true,
   },
 
-  -- Formatters
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- use for stability; omit to use `main` branch for the latest features
+    event = "verylazy",
+    config = function()
+      require("nvim-surround").setup {
+        -- configuration here, or leave empty to use defaults
+      }
+    end,
+  },
+
+  -- formatters
   {
     "stevearc/conform.nvim",
-    event = { "BufWritePre", "BufNewFile" }, -- uncomment for format on save
+    event = { "bufwritepre", "bufnewfile" }, -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
   },
 
-  -- Nvim tree
+  -- nvim tree
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
@@ -32,12 +43,12 @@ return {
         ignore = false,
       },
       filters = {
-        dotfiles = false, --INFO: Set this to false to show dotfiles
+        dotfiles = false, --info: set this to false to show dotfiles
       },
     },
   },
 
-  -- Lsp configuration
+  -- lsp configuration
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -48,13 +59,13 @@ return {
 
   {
     "williamboman/mason.nvim",
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
+    cmd = { "mason", "masoninstall", "masoninstallall", "masonupdate" },
     opts = function()
       return require "configs.mason"
     end,
   },
 
-  -- TreeSitter
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -115,19 +126,19 @@ return {
     end,
   },
 
-  -- Linters
+  -- linters
   {
     "mfussenegger/nvim-lint",
     lazy = true,
-    event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+    event = { "bufreadpre", "bufnewfile" }, -- to disable, comment this out
     config = function()
       require "configs.nvim-lint"
     end,
   },
 
-  -- NvChad/nvim-colorizer -- color highlighter
+  -- nvchad/nvim-colorizer -- color highlighter
   {
-    "NvChad/nvim-colorizer.lua",
+    "nvchad/nvim-colorizer.lua",
     config = function()
       local colorizer = require "colorizer"
       colorizer.setup {
@@ -138,14 +149,14 @@ return {
     end,
   },
   --
-  -- Tailwindcss highlighter
+  -- tailwindcss highlighter
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
     },
     opts = function(_, opts)
-      -- original NvChad kind icon formatter
+      -- original nvchad kind icon formatter
       local format_kinds = opts.formatting.format
       opts.formatting.format = function(entry, item)
         format_kinds(entry, item) -- add icons
@@ -160,7 +171,7 @@ return {
       local conf = require "nvchad.configs.telescope"
       table.insert(conf.extensions_list, "media_files") -- extending the default list
 
-      -- Append the media files settings to the list of exiting extension table
+      -- append the media files settings to the list of exiting extension table
       table.insert(conf.extensions, "media_files") -- extending the default list
       conf.extensions.media_files = {
         filetypes = { "png", "webp", "jpg", "jpeg", "webm, pdf" },
@@ -174,10 +185,10 @@ return {
   -- lazy.nvim
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
+    event = "verylazy",
     opts = {
       lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        -- override markdown rendering so that **cmp** and other plugins use **treesitter**
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
@@ -195,10 +206,10 @@ return {
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
+      "muniftanjim/nui.nvim",
+      -- optional:
       --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
+      --   if not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
   },
@@ -209,7 +220,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
     config = function()
-      require("todo-comments").setup() -- Load the todo-comments plugin with the above configuration
+      require("todo-comments").setup() -- load the todo-comments plugin with the above configuration
     end,
   },
 }

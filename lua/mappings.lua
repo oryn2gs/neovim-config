@@ -2,6 +2,13 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- function SurroundText(text)
+--   -- write a logic that will surroun text
+--   normal! I<a:surround_text>
+--   normal! o
+--   normal! A<a:surround_text>
+-- end
+
 -- INFO: Basic mappings
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
