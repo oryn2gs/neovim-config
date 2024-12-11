@@ -2,47 +2,44 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
--- INFO: Basic mappings
+-- Basic mappings
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all in the buffer" })
 map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 
--- INFO: LSP mappings
+-- LSP mappings
 map("n", "<leader>pd", ":lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true, desc = "LSP peek definition" })
 
--- INFO: Nvim tree mappings
+-- Nvim tree mappings
 map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle window" })
 --TODO: add am keymap to open file as folder to system app
 
--- INFO: Telecope mappings
+-- Telecope mappings
 map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
 vim.api.nvim_set_keymap("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
 
--- INFO: conform mapping
+-- conform mapping
 map("n", "<leader>fp", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "Format Files" })
 
--- INFO: NVIM window management
+-- Noice Mappings
+map("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Noice messages in telescope." })
+map("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Noice errors message." })
+
+-- NVIM window management
 map("n", "<leader>ws", ":split<Return>", { desc = "Window split horizontally" })
 map("n", "<leader>wv", ":vsplit<Return>", { desc = "Window split vertically" })
-map("n", "<leader>we", "<C-w>=", { desc = "Window resize equal" })
-map("n", "<leader>wm", "<C-w>|", { desc = "Window rezize max width" })
--- map("n", "<leader>wh", "<C-w>h", { desc = "Window move left" })
--- map("n", "<leader>wk", "<C-w>k", { desc = "Window move up" })
--- map("n", "<leader>wj", "<C-w>j", { desc = "Window move down" })
--- map("n", "<leader>wl", "<C-w>l", { desc = "Window move right", silent = true })
--- map("n", "<leader>w_", "<C-w>_", { desc = "Window resize max height" })
--- map("n", "<leader>wo", "<C-w>o", { desc = "Window close all other" })
--- map("n", "<leader>wx", "<C-w>x", { desc = "Window swap current with next" })
+map("n", "<leader>we", "<C-w>=", { desc = "Window resize equally" })
+map("n", "<leader>wm", "<C-w>|", { desc = "Window rezize active window to max-width" })
 
--- INFO: Buffer mappings
+-- Buffer mappings
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 map("n", "<leader>bd", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer close current" })
 
--- INFO: function to delete buffers except the active one
+-- function to delete buffers except the active one
 function delete_other_buffers()
   local current_buffer = vim.api.nvim_get_current_buf()
   local all_buffers = vim.api.nvim_list_bufs()
@@ -54,7 +51,7 @@ function delete_other_buffers()
 end
 map("n", "<leader>bo", ":lua delete_other_buffers()<CR>", { noremap = true, desc = "Buffer close all other" })
 
--- INFO: Terminal mappings
+-- Terminal mappings
 map({ "n", "t" }, "<leader>tt", function()
   require("nvchad.term").toggle { pos = "vsp", id = "vtoggleTerm", size = 0.5 }
 end, { desc = "Terminal Toggleable vertical term" })
@@ -68,7 +65,7 @@ map("t", "<ESC>", function()
   vim.api.nvim_win_close(win, true)
 end, { desc = "Terminal Close term in terminal mode" })
 
---  INFO: Toggle between 'manual' and 'indent' foldmethod
+--  Toggle between 'manual' and 'indent' foldmethod
 vim.api.nvim_set_keymap(
   "n",
   "<leader>tf",
@@ -86,7 +83,7 @@ function ToggleFoldMethod()
   end
 end
 
--- INFO: Comments
+-- Comments
 local function set_comment_keymap()
   local comment_map = {
     python = "#",
@@ -124,7 +121,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = set_comment_keymap,
 })
 
--- INFO: disable defaults NvChad mappings
+-- disable defaults NvChad mappings
 local nomap = vim.api.nvim_del_keymap
 -- vim.api.nvim_del_keymap("n", "<leader>gt")
 nomap("n", "<leader>/")
