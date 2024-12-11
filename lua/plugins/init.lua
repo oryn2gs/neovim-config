@@ -10,7 +10,6 @@ return {
   },
 
   -- nvim surround
-  -- nvim surround
   {
     "kylechui/nvim-surround",
     version = "*", -- use for stability; omit to use `main` branch for the latest features
@@ -54,7 +53,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
   },

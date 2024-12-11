@@ -1,4 +1,8 @@
-local configs = require "nvchad.configs.lspconfig"
+local nvlsp = require "nvchad.configs.lspconfig"
+local lspconfig = require "lspconfig"
+
+-- load defaults Nvchad lspconfig
+nvlsp.defaults()
 
 local servers = {
   html = {},
@@ -50,9 +54,10 @@ local servers = {
   },
 }
 
-for name, opts in pairs(servers) do
-  opts.on_init = configs.on_init
-  opts.on_attach = configs.on_attach
-  opts.capabilities = configs.capabilities
-  require("lspconfig")[name].setup(opts)
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    capabilities = nvlsp.capabilities,
+  }
 end
