@@ -39,6 +39,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
+      sort = {}, -- override defaults sorting methods
       git = {
         enable = true,
         ignore = false,
@@ -46,6 +47,30 @@ return {
       filters = {
         dotfiles = false, --info: set this to false to show dotfiles
       },
+      view = {
+        width = 35,
+      },
+
+      on_attach = function(bufnr)
+        local api = require "nvim-tree.api"
+        local map = vim.keymap.set
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        -- toggle is configured in global mappings "mappings.lua"
+        -- map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window") --
+        map("n", "<C-s>", function()
+          local node = api.tree.get_node_under_cursor()
+          if node then
+            vim.ui.open(node.absolute_path)
+          end
+        end, opts "Open in system application")
+      end,
     },
   },
 
@@ -199,7 +224,7 @@ return {
         signature = {
           enabled = true,
           auto_open = {
-            enabled = true, -- enable auto open
+            enabled = false, -- enable auto open
             trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
             luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
             throttle = 50, -- Debounce lsp signature help request by 50ms

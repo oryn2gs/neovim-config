@@ -1,5 +1,6 @@
 TODOS.md
 test.py
 *.js*
+.DS_Store
 
 tmux/.tmux
