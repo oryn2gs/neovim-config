@@ -64,6 +64,8 @@ return {
         -- custom mappings
         -- toggle is configured in global mappings "mappings.lua"
         -- map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window") --
+        map("n", "D", api.fs.remove, opts "Delete")
+        map("n", "d", api.fs.trash, opts "Trash")
         map("n", "<C-s>", function()
           local node = api.tree.get_node_under_cursor()
           if node then
