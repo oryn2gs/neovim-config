@@ -204,7 +204,6 @@ return {
         filetypes = { "png", "webp", "jpg", "jpeg", "webm, pdf" },
         find_cmd = "rg",
       }
-
       return conf
     end,
   },
@@ -227,8 +226,8 @@ return {
           enabled = true,
           auto_open = {
             enabled = false, -- enable auto open
-            trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
-            luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+            trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+            luasnip = false, -- Will open signature help when jumping to Luasnip insert nodes
             throttle = 50, -- Debounce lsp signature help request by 50ms
           },
           view = nil, -- when nil, use defaults from documentation
@@ -236,23 +235,10 @@ return {
           opts = {
             border = "none",
             focus = false,
-            -- focusable = false,
           }, -- merged with defaults from documentation
         },
-
-        -- defaults for hover and signature help
-        documentation = {
-          view = "hover",
-          ---@type NoiceViewOptions
-          opts = {
-            lang = "markdown",
-            replace = true,
-            render = "plain",
-            format = { "{message}" },
-            win_options = { concealcursor = "n", conceallevel = 3 },
-          },
-        },
       },
+
       -- you can enable a preset for easier configuration
       presets = {
         bottom_search = false, -- use a classic bottom cmdline for search
