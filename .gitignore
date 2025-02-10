@@ -1,6 +1,24 @@
+# These ignored file are just for testing
+
+# files
 TODOS.md
 test.py
-*.js*
+test.md
+test.js
+
+
+# media dir
+media/
+
+# Cache 
 .DS_Store
 
+# env file
+*.env
+
+
+# -- Backup files
+*.bak
+
+# Tmux 
 tmux/.tmux
