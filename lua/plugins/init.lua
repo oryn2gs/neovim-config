@@ -38,41 +38,7 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {
-      git = {
-        enable = true,
-        ignore = false,
-      },
-      filters = {
-        dotfiles = false, --info : toogle dotfiles visible
-      },
-      view = {
-        width = 35,
-      },
-
-      on_attach = function(bufnr)
-        local api = require "nvim-tree.api"
-        local map = vim.keymap.set
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- custom mappings
-        -- toggle is configured in global mappings "mappings.lua"
-        -- map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window") --
-        map("n", "D", api.fs.remove, opts "Delete")
-        map("n", "d", api.fs.trash, opts "Trash")
-        map("n", "<C-s>", function()
-          local node = api.tree.get_node_under_cursor()
-          if node then
-            vim.ui.open(node.absolute_path)
-          end
-        end, opts "Open in system application")
-      end,
-    },
+    opts = require "configs.nvimtree",
   },
 
   -- lsp configuration
@@ -100,60 +66,14 @@ return {
     },
     config = function()
       require "configs.null-ls" -- require your null-ls config here (example below)
-      local mason_null_ls = require "mason-null-ls"
-      mason_null_ls.setup {
-        ensure_installed = {
-          "stylua", -- lua formatter
-
-          "black", -- python formatter
-          "pylint", -- python linter
-          "ruff", -- python linter
-
-          "prettier",
-          "prettierd", -- prettier formatter
-          "eslint",
-          "eslint_d", -- js linter
-        },
-        -- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
-        automatic_installation = true,
-      }
+      require "configs.mason-null-ls"
     end,
   },
 
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "lua",
-
-        "vim",
-        "vimdoc",
-        "regex",
-        "bash",
-        "markdown",
-        "markdown_inline",
-
-        "gitcommit",
-        "dockerfile",
-        "yaml",
-
-        "html",
-        "css",
-
-        "python",
-        "scss",
-        "htmldjango",
-
-        "javascript",
-        "typescript",
-        -- "javascriptreact",
-        -- "typescriptreact",
-        "tsx",
-
-        "prisma",
-      },
-    },
+    opts = require "configs.nvim-treesitter",
   },
 
   -- linters
@@ -209,58 +129,11 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {
-      lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **treesitter**
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-        },
-
-        -- lsp signature help
-        signature = {
-          enabled = true,
-          auto_open = {
-            enabled = false, -- enable auto open
-            trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-            luasnip = false, -- Will open signature help when jumping to Luasnip insert nodes
-            throttle = 50, -- Debounce lsp signature help request by 50ms
-          },
-          view = nil, -- when nil, use defaults from documentation
-          ---@type NoiceViewOptions
-          opts = {
-            border = "none",
-            focus = false,
-          }, -- merged with defaults from documentation
-        },
-      },
-
-      -- you can enable a preset for easier configuration
-      presets = {
-        bottom_search = false, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
-      },
-
-      --show recording with noice
-      routes = {
-        {
-          view = "notify",
-          filter = { event = "msg_showmode" },
-        },
-      },
-    },
     dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "muniftanjim/nui.nvim",
-      -- optional:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   if not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
+    opts = require "configs.noice",
   },
 
   -- todo-comments
