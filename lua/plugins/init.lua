@@ -84,6 +84,7 @@ return {
     end,
   },
 
+  -- Mason
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate", "MasonUninstallAll", "MasonLog" },
@@ -142,7 +143,8 @@ return {
           "stylua", -- lua formatter
 
           "black", -- python formatter
-          "pylint", -- python linter
+          -- "pylint", -- python linter
+          "ruff", -- python linter
 
           "prettier",
           "prettierd", -- prettier formatter

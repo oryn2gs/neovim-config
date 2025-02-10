@@ -24,8 +24,8 @@ return {
   -- customize defaults pickers
   pickers = {
     find_files = {
-      hidden = true, -- show hidden files
-      no_ignore = true, -- show file ignore by gitignore
+      hidden = false, -- show hidden files
+      no_ignore = false, -- show file ignore by gitignore
     },
   },
 

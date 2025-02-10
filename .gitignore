@@ -21,4 +21,4 @@ media/
 *.bak
 
 # Tmux 
-tmux/.tmux
+tmux/.tmux/

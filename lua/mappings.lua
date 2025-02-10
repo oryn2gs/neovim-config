@@ -15,7 +15,7 @@ map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle wind
 
 -- Telecope mappings
 map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
-vim.api.nvim_set_keymap("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
+map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
 
 -- conform mapping
 map("n", "<leader>fp", function()

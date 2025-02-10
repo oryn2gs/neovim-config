@@ -51,7 +51,7 @@ else
   -- Configuring python in the workspace
   local function get_python_interpreter()
     -- Determine the Python interpreter path dynamically, defaults to conda python.
-    local default_python = "/Users/alchee/opt/anaconda3/bin/python"
+    local default_python = "/opt/anaconda3/bin/python"
 
     if os.getenv "VIRTUAL_ENV" then
       print "Venv activated......"

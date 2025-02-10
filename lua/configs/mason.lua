@@ -2,6 +2,7 @@ local options = require "nvchad.configs.mason"
 
 opts = {
   ensure_installed = {
+    -- python
     "pyright",
 
     -- web-dev
