@@ -30,7 +30,14 @@ map("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Noice errors message."
 map("n", "<leader>ws", ":split<Return>", { desc = "Window split horizontally" })
 map("n", "<leader>wv", ":vsplit<Return>", { desc = "Window split vertically" })
 map("n", "<leader>we", "<C-w>=", { desc = "Window resize equally" })
-map("n", "<leader>wm", "<C-w>|", { desc = "Window rezize active window to max-width" })
+map("n", "<leader>wm", "<C-w>|", { desc = "Window resize active window to max-width" })
+map("n", "<leader>wo", "<C-w>o", { desc = "Window quit all other windows" })
+map("n", "<leader>wq", "<C-w>q", { desc = "Window quit active window" })
+map("n", "<leader>ww", "<C-w>w", { desc = "Window switch" })
+map("n", "<leader>w>", "<C-w>>", { desc = "Window width increase" })
+map("n", "<leader>w<", "<C-w><", { desc = "Window width decrease" })
+map("n", "<leader>w+", "<C-w>+", { desc = "Window height increase" })
+map("n", "<leader>w-", "<C-w>-", { desc = "Window height decrease" })
 
 -- Buffer mappings
 map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })

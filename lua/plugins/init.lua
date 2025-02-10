@@ -192,19 +192,13 @@ return {
     end,
   },
 
+  -- Telescope
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    cmd = "Telescope",
     opts = function()
-      local conf = require "nvchad.configs.telescope"
-      table.insert(conf.extensions_list, "media_files") -- extending the default list
-
-      -- append the media files settings to the list of exiting extension table
-      table.insert(conf.extensions, "media_files") -- extending the default list
-      conf.extensions.media_files = {
-        filetypes = { "png", "webp", "jpg", "jpeg", "webm, pdf" },
-        find_cmd = "rg",
-      }
-      return conf
+      return require "configs.telescope"
     end,
   },
 
