@@ -39,13 +39,12 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      sort = {}, -- override defaults sorting methods
       git = {
         enable = true,
         ignore = false,
       },
       filters = {
-        dotfiles = false, --info: set this to false to show dotfiles
+        dotfiles = false, --info : toogle dotfiles visible
       },
       view = {
         width = 35,
@@ -93,6 +92,34 @@ return {
     end,
   },
 
+  {
+    "jay-babu/mason-null-ls.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+    },
+    config = function()
+      require "configs.null-ls" -- require your null-ls config here (example below)
+      local mason_null_ls = require "mason-null-ls"
+      mason_null_ls.setup {
+        ensure_installed = {
+          "stylua", -- lua formatter
+
+          "black", -- python formatter
+          "pylint", -- python linter
+          "ruff", -- python linter
+
+          "prettier",
+          "prettierd", -- prettier formatter
+          "eslint",
+          "eslint_d", -- js linter
+        },
+        -- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
+        automatic_installation = true,
+      }
+    end,
+  },
+
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -127,32 +154,6 @@ return {
         "prisma",
       },
     },
-  },
-
-  {
-    "jay-babu/mason-null-ls.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
-    config = function()
-      require "configs.null-ls" -- require your null-ls config here (example below)
-      local mason_null_ls = require "mason-null-ls"
-      mason_null_ls.setup {
-        ensure_installed = {
-          "stylua", -- lua formatter
-
-          "black", -- python formatter
-          -- "pylint", -- python linter
-          "ruff", -- python linter
-
-          "prettier",
-          "prettierd", -- prettier formatter
-          "eslint",
-          "eslint_d", -- js linter
-        },
-      }
-    end,
   },
 
   -- linters
