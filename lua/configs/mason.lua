@@ -14,6 +14,9 @@ opts = {
     "css-lsp",
 
     "lua-language-server",
+
+    -- Debugger
+    "debugpy",
   },
 }
 

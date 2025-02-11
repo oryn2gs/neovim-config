@@ -6,7 +6,10 @@ local M = {}
 
 -- For more configuration check `nvui` with telescope
 M.ui = {
-  tabufline = {},
+  tabufline = {
+    -- enabled = false,
+    order = { "treeOffset", "buffers", "btns" },
+  },
   statusline = {},
 
   hl_override = {

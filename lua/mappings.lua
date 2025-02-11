@@ -2,6 +2,10 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- map("n", "<Leader>bb", function()
+--   require("dap").toggle_breakpoint()
+-- end)
+
 -- Basic mappings
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all in the buffer" })

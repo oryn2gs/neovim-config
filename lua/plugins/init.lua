@@ -130,7 +130,7 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
-      "muniftanjim/nui.nvim",
+      "munifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
     opts = require "configs.noice",
@@ -145,4 +145,52 @@ return {
       require("todo-comments").setup() -- load the todo-comments plugin with the above configuration
     end,
   },
+
+  -- nvim-dap configuration
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    event = { "BufReadPre *.py" },
+    dependencies = {
+      "rcarriga/nvim-dap-ui", -- DAP UI
+      "theHamsta/nvim-dap-virtual-text", -- DAP Virtual Text
+      -- "mfussenegger/nvim-dap-python", -- Python DAP support
+    },
+    config = function()
+      require "configs.nvim-dap"
+    end,
+  },
+
+  -- nvim-dap-ui configuration
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = true,
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require "configs.dapui"
+    end,
+  },
+
+  -- nvim dap virtual text
+  {
+    "nvim-dap-virtual-text",
+    event = "VeryLazy",
+    dependencies = {
+      "mfussenegger/nvim-dap", -- Ensure dap is loaded before virtual text
+    },
+    opts = {}, -- if you want custom configuration
+  },
+
+  -- dap-python configuration
+  -- INFO: using default configuration and adapters
+  -- {
+  --   "mfussenegger/nvim-dap-python",
+  --   lazy = true,
+  --   config = function()
+  --     require "configs.dap-python"
+  --   end,
+  -- },
 }
