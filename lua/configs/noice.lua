@@ -12,17 +12,26 @@ return {
     signature = {
       enabled = true,
       auto_open = {
-        enabled = false, -- enable auto open
-        trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+        enabled = false,
+        trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
         luasnip = false, -- Will open signature help when jumping to Luasnip insert nodes
         throttle = 50, -- Debounce lsp signature help request by 50ms
       },
       view = nil, -- when nil, use defaults from documentation
       ---@type NoiceViewOptions
+      opts = {}, -- merged with defaults from documentation
+    },
+    -- documentation
+    documentation = {
+      view = "hover",
+      ---@type NoiceViewOptions
       opts = {
-        border = "none",
-        focus = false,
-      }, -- merged with defaults from documentation
+        lang = "markdown",
+        replace = true,
+        render = "plain",
+        format = { "{message}" },
+        win_options = { concealcursor = "n", conceallevel = 3 },
+      },
     },
   },
 
@@ -36,10 +45,13 @@ return {
   },
 
   --show recording with noice
-  routes = {
-    {
-      view = "notify",
-      filter = { event = "msg_showmode" },
-    },
-  },
+  -- INFO: uncomment to show recording with noice
+  -- using statusline to show recording
+  --
+  -- routes = {
+  --   {
+  --     view = "notify",
+  --     filter = { event = "msg_showmode" },
+  --   },
+  -- },
 }
