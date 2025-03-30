@@ -5,6 +5,13 @@ local map = vim.keymap.set
 -- map("n", "<Leader>bb", function()
 --   require("dap").toggle_breakpoint()
 -- end)
+--
+--
+
+-- Themes
+map("n", "<leader>ta", function()
+  require("base46").toggle_transparency()
+end, { desc = "Theme toggle transparency." })
 
 -- Basic mappings
 map({ "i", "n", "v" }, "<C-q>", "<cmd>:wa | qall<CR>", { desc = "Save all and exit" })
@@ -48,6 +55,23 @@ map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "Buffer New" })
 map("n", "<leader>bd", function()
   require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer close current" })
+map("n", "<leader>bh", function()
+  require("nvchad.tabufline").move_buf(-1)
+end, { desc = "Buffer move current to left." })
+map("n", "<leader>bl", function()
+  require("nvchad.tabufline").move_buf(1)
+end, { desc = "Buffer move current to right." })
+map("n", "<leader>bf", function()
+  require("nvchad.tabufline").closeBufs_at_direction "right"
+end, { desc = "Buffer close at direction right." })
+map("n", "<leader>bb", function()
+  require("nvchad.tabufline").closeBufs_at_direction "left"
+end, { desc = "Buffer move current to right." })
+-- for i = 1, 9, 1 do -- change the buffer number
+--   vim.keymap.set("n", string.format("<A-%s>", i), function()
+--     vim.api.nvim_set_current_buf(vim.t.bufs[i])
+--   end)
+-- end
 
 -- function to delete buffers except the active one
 function delete_other_buffers()
