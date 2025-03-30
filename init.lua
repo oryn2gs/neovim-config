@@ -38,7 +38,7 @@ else
   dofile(vim.g.base46_cache .. "statusline")
 
   require "nvchad.autocmds"
-  require "lua.highlights" --  our custom highlights settings.
+  require "highlights" --  our custom highlights settings.
 
   vim.schedule(function()
     require "mappings"
