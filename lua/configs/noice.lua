@@ -1,5 +1,6 @@
 -- noice configuration https://github.com/folke/noice.nvim
 return {
+  background_color = "#000000",
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **treesitter**
     override = {
