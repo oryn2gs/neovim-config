@@ -20,7 +20,8 @@ M.ui = {
       recording = function()
         if vim.fn.reg_recording() ~= "" then
           -- If recording, return the register name
-          return string.format(" Recording @%s ", vim.fn.reg_recording())
+          -- return string.format(" Recording @%s ", vim.fn.reg_recording())
+          return string.format("%%#Recording# Recording @%s %%#Normal#", vim.fn.reg_recording())
         else
           return ""
         end
@@ -55,11 +56,12 @@ M.base46 = {
 -- load nvChad dashboard on startup
 M.nvdash = {
   load_on_startup = true,
+  -- header = {}, -- change intro header
 }
 
 --
 M.cheatsheet = {
-  theme = "grid", -- simple/grid simple will return as list grid two rows or list
+  theme = "grid", -- simple/grid
   -- to exclude the groups from cheat sheet -- add a group name in exluded groups
   excluded_groups = {},
 }
