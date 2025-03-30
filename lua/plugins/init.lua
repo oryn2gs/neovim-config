@@ -136,17 +136,6 @@ return {
     opts = require "configs.noice",
     -- FIX: need to fix the auto entering lsp "hover" view -
     -- link -> https://github.com/folke/noice.nvim/blob/0427460c2d7f673ad60eb02b35f5e9926cf67c59/lua/noice/config/views.lua
-    --
-    -- config = function()
-    --   local noice = require "noice"
-    --   noice.setup {
-    --     views = {
-    --       -- popup = {
-    --       --   enter = false,
-    --       -- },
-    --     },
-    --   }
-    -- end,
   },
 
   -- todo-comments
