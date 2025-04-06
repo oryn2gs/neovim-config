@@ -26,6 +26,8 @@ return {
     -- "typescriptreact",
     "tsx",
 
+    "rust",
+
     "prisma",
   },
 }

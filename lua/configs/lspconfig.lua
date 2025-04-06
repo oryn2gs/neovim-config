@@ -28,8 +28,8 @@ local servers = {
       },
     },
   },
-  -- tsserver = {},
   ts_ls = {},
+  -- cva configuration -- https://cva.style/docs/getting-started/installation#tailwind-css
   tailwindcss = {},
   eslint = {},
   emmet_language_server = {},
@@ -52,10 +52,24 @@ local servers = {
       },
     },
   },
+  -- for information on cofiguring rust lsp check: (https://rust-analyzer.github.io/book/other_editors.html#nvim-lsp)
+  rust_analyzer = {},
 }
 
+-- extending default lsp on attach
+local function on_attach(client, bufnr)
+  -- Call the default on_attach function
+  nvlsp.on_attach(client, bufnr)
+
+  -- Enable inlay hints if the LSP supports it
+  if client.name == "rust_analyzer" then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+end
+
 for lsp, opts in pairs(servers) do
-  opts.on_attach = nvlsp.on_attach
+  -- opts.on_attach = nvlsp.on_attach
+  opts.on_attach = on_attach
   opts.on_init = nvlsp.on_init
   opts.capabilities = nvlsp.capabilities
   lspconfig[lsp].setup(opts)

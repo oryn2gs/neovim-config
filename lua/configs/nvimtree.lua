@@ -21,15 +21,14 @@ return {
     api.config.mappings.default_on_attach(bufnr)
 
     -- custom mappings
-    -- toggle is configured in global mappings "mappings.lua"
-    -- map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window") --
+    -- map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", opts "Nvimtree Toggle window")
     map("n", "D", api.fs.remove, opts "Delete")
     map("n", "d", api.fs.trash, opts "Trash")
-    map("n", "<C-s>", function()
+    map("n", "<C-s>", function() -- open file/folder under the cursor in system default application
       local node = api.tree.get_node_under_cursor()
       if node then
         vim.ui.open(node.absolute_path)
       end
-    end, opts "Open in system application")
+    end, opts "Open file/folder with system application")
   end,
 }
