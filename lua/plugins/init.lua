@@ -1,12 +1,10 @@
 return {
   {
     "nvim-lua/popup.nvim",
-    lazy = true,
   },
 
   {
     "nvim-telescope/telescope-media-files.nvim",
-    lazy = true,
   },
 
   -- nvim surround
@@ -24,9 +22,70 @@ return {
   -- formatters
   {
     "stevearc/conform.nvim",
-    event = { "bufwritepre", "bufnewfile" }, -- uncomment for format on save
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        -- Customize or remove this keymap to your liking
+        "<leader>fp",
+        function()
+          require("conform").format { async = true }
+        end,
+        mode = "",
+        desc = "Format buffer",
+      },
+    },
     config = function()
-      require "configs.conform"
+      require("conform").setup {
+        formatters_by_ft = {
+          lua = { "stylua" },
+          css = { "prettier" },
+          html = { "prettier" },
+          javascript = {
+            "prettierd",
+            "prettier",
+          },
+          javascriptreact = {
+            "prettierd",
+            "prettier",
+          },
+          typescript = {
+            "prettierd",
+            "prettier",
+          },
+          typescriptreact = {
+            "prettierd",
+            "prettier",
+            stop_after_first = true,
+          },
+
+          python = function(bufnr)
+            if require("conform").get_formatter_info("ruff_format", bufnr).available then
+              return { "ruff_format" }
+            else
+              return { "isort", "black" }
+            end
+          end,
+          -- Use the "*" filetype to run formatters on all filetypes.
+          ["*"] = { "codespell" },
+          -- Use the "_" filetype to run formatters on filetypes that don't
+          -- have other formatters configured.
+          ["_"] = { "trim_whitespace" },
+          rust = {
+            "rustfmt",
+          },
+        },
+        format_on_save = {
+          -- I recommend these options. See :help conform.format for details.
+          lsp_format = "fallback",
+          -- timeout_ms = 500,
+          timeout_ms = 2000, -- changing default timeout of 1000, because of black fmt timeout issue
+        },
+        stop_after_first = true,
+        log_level = vim.log.levels.DEBUG, -- increase the verbosity of log level
+        notify_on_error = true,
+        notify_no_formatters = true,
+      }
     end,
   },
 
@@ -99,7 +158,7 @@ return {
     end,
   },
 
-  -- tailwindcss highlighter
+  -- nvim-cmp auto completion plugins for neovim --
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -115,10 +174,22 @@ return {
     end,
   },
 
+  -- tailwindcss autocompletion plugins
+  {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+    -- optionally, override the default options:
+    config = function()
+      require("tailwindcss-colorizer-cmp").setup {
+        color_square_width = 2,
+      }
+    end,
+  },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    lazy = false,
     cmd = "Telescope",
     opts = function()
       return require "configs.telescope"
@@ -147,52 +218,4 @@ return {
       require("todo-comments").setup() -- load the todo-comments plugin with the above configuration
     end,
   },
-
-  -- nvim-dap configuration
-  {
-    "mfussenegger/nvim-dap",
-    lazy = true,
-    event = { "BufReadPre *.py" },
-    dependencies = {
-      "rcarriga/nvim-dap-ui", -- DAP UI
-      "theHamsta/nvim-dap-virtual-text", -- DAP Virtual Text
-      -- "mfussenegger/nvim-dap-python", -- Python DAP support
-    },
-    config = function()
-      require "configs.nvim-dap"
-    end,
-  },
-
-  -- nvim-dap-ui configuration
-  {
-    "rcarriga/nvim-dap-ui",
-    lazy = true,
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "mfussenegger/nvim-dap",
-    },
-    config = function()
-      require "configs.dapui"
-    end,
-  },
-
-  -- nvim dap virtual text
-  {
-    "nvim-dap-virtual-text",
-    event = "VeryLazy",
-    dependencies = {
-      "mfussenegger/nvim-dap", -- Ensure dap is loaded before virtual text
-    },
-    opts = {}, -- if you want custom configuration
-  },
-
-  -- dap-python configuration
-  -- INFO: using default configuration and adapters
-  -- {
-  --   "mfussenegger/nvim-dap-python",
-  --   lazy = true,
-  --   config = function()
-  --     require "configs.dap-python"
-  --   end,
-  -- },
 }

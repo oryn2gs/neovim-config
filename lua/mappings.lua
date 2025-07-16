@@ -27,11 +27,7 @@ map("n", "<leader>ub", "<cmd>NvimTreeToggle<CR>", { desc = "Nvimtree Toggle wind
 -- Telecope mappings
 map("n", "<leader>fm", "<cmd>Telescope media_files<CR>", { desc = "Telescope find media files" })
 map("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Telescope find todos" })
-
--- conform mapping
-map("n", "<leader>fp", function()
-  require("conform").format { lsp_fallback = true }
-end, { desc = "Format Files" })
+map("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "Telescope find recent files" })
 
 -- Noice Mappings
 map("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Noice messages in telescope." })

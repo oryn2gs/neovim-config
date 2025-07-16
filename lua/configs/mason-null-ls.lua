@@ -5,6 +5,7 @@ mason_null_ls.setup {
   ensure_installed = {
     "stylua", -- lua formatter
 
+    "isort",
     "black", -- python formatter
     "pylint", -- python linter
     "ruff", -- python linter
@@ -13,6 +14,8 @@ mason_null_ls.setup {
     "prettierd", -- prettier formatter
     "eslint",
     "eslint_d", -- js linter
+
+    "rustfmt",
   },
   -- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
   automatic_installation = true,
