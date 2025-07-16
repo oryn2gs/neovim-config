@@ -1,6 +1,6 @@
 local options = require "nvchad.configs.mason"
 
-opts = {
+local opts = {
   ensure_installed = {
     -- python
     "pyright",
@@ -14,9 +14,6 @@ opts = {
     "css-lsp",
 
     "lua-language-server",
-
-    -- Debugger
-    "debugpy",
   },
 }
 

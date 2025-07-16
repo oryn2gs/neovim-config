@@ -30,7 +30,13 @@ local servers = {
   },
   ts_ls = {},
   -- cva configuration -- https://cva.style/docs/getting-started/installation#tailwind-css
-  tailwindcss = {},
+  tailwindcss = {
+    settings = {
+      tailwindCSS = {
+        classFunctions = { "cva", "cx" },
+      },
+    },
+  },
   eslint = {},
   emmet_language_server = {},
   pyright = {
